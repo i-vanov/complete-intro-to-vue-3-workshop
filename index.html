@@ -9,11 +9,15 @@
   <body>
     <div id="app">
       <p v-if="characterList.length === 0">There are no charachters</p>
-      <ul v-else>
+      <ul v-else-if="characterList.length % 2 === 0">
         <li v-for="character in characterList">
           {{ character.name }}
         </li>
       </ul>
+      <p><span v-for="(character, index) in characterList">
+        {{ character.name }}{{ index === characterList.length - 1 ? '' : ', ' }}
+      </span></p>
+      <p v-else>There are odd characters!</p>
     </div>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script>
