@@ -8,8 +8,16 @@
   </head>
   <body>
     <div id="app">
+      <h1>Counter</h1>
+      <p>{{ count }}</p>
+      <button v-on:click="incrementCount">Increment Count</button>
+      <label for="incrementAmount">Increment by: </label>
+      <input type="number" />
+      <hr />
+
+
       <p v-if="characterList.length === 0">There are no charachters</p>
-      <ul v-else-if="characterList.length % 2 === 0">
+      <ul v-else>
         <li v-for="character in characterList">
           {{ character.name }}
         </li>
@@ -17,12 +25,13 @@
       <p><span v-for="(character, index) in characterList">
         {{ character.name }}{{ index === characterList.length - 1 ? '' : ', ' }}
       </span></p>
-      <p v-else>There are odd characters!</p>
     </div>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script>
       Vue.createApp({
         data: () => ({
+          count: 10,
+          incrementAmount: 1,
           characterList: [
             {
               name: "Mike",
@@ -37,7 +46,13 @@
               name: "Louis",
             },
           ]
-        })
+        }),
+        // JS functions available to call any time
+        methods: {
+          incrementCount() {
+            this.count += this.incrementAmount;
+          }
+        }
       }).mount("#app");
     </script>
   </body>

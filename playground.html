@@ -9,6 +9,17 @@
   <body>
     <h1>Vue app</h1>
     <div id="app">
+      <h1>Counter</h1>
+      <p>{{ count }}</p>
+      <button v-on:click="incrementCount(10, $event)">Increment Count</button>
+      <div>
+        <label for="incrementAmount">Increment by: </label>
+        <input type="number"
+          v-model="incrementAmount"  />
+      </div>
+      <hr />
+
+
       <p v-if="message.length % 2 === 0">Even: {{ message }}</p>
       <p v-else>Odd: {{ message }}</p>
 
@@ -32,9 +43,18 @@
         // Use data() in order to preserve the reactivity
         data() {
           return {
+            count: 10,
+            incrementAmount: 1,
             message: "This is a Vue App!",
             listOfNumbers: [1, 2, 3, 4, 5],
           }
+        },
+        methods: {
+          incrementCount(newAmount, event) {
+            console.log(newAmount);
+            console.log(event);
+            this.count += this.incrementAmount;
+          },
         }
       });
 
