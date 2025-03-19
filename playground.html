@@ -9,8 +9,9 @@
   <body>
     <h1>Vue app</h1>
     <div id="app">
-      <h1>{{ counterTitle }}</h1>
+      <h1>{{ displayTitle }}</h1>
       <p v-bind:data-increment-by="incrementAmount">{{ count }}</p>
+      <p> {{ optimizeIncrementAmount }}</p>
       <button v-on:click="incrementCount(10, $event)">Increment Count</button>
       <div>
         <label for="incrementAmount">Increment by: </label>
@@ -50,15 +51,29 @@
             counterTitle: "Counter Standard",
           }
         },
+        
+        computed: {
+          displayTitle() {
+            if (this.count > 20) {
+              return "Counter Standard - Very Long";
+            } else {
+              return "Counter Standard"
+            }
+          },
+          optimizeIncrementAmount() {
+            return this.displayTitle.length * this.incrementAmount;
+          }
+        },
         methods: {
           incrementCount(newAmount, event) {
-            // console.log(event);
-            this.count += this.incrementAmount;
+            this.count += this.optimizeIncrementAmount;
           },
         },
         watch: {
           count(newValue) {
-            console.log(newValue);
+            if (newValue > 20) {
+              this.counterTitle += " Very Long"
+            }
           }
         }
       });
