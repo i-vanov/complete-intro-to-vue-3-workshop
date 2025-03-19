@@ -10,7 +10,7 @@
     <h1>Vue app</h1>
     <div id="app">
       <h1>Counter</h1>
-      <p>{{ count }}</p>
+      <p v-bind:data-increment-by="incrementAmount">{{ count }}</p>
       <button v-on:click="incrementCount(10, $event)">Increment Count</button>
       <div>
         <label for="incrementAmount">Increment by: </label>
@@ -52,7 +52,7 @@
         methods: {
           incrementCount(newAmount, event) {
             console.log(newAmount);
-            console.log(event);
+            // console.log(event);
             this.count += this.incrementAmount;
           },
         }
